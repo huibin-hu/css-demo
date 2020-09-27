@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    h1{
+      text-align: center;
+    }
+    .full-img{
+      width: 800px;
+      height: 462px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .full-img img{
+      width: 800px;
+      height: 462px;
+      background-size: cover;
+    }
+    .overlay{
+      position: absolute;
+      width: 800px;
+      height: 462px;
+      top: 0;
+      left: 0;
+    }
+    .dark{
+      position: absolute;
+      top: 0;
+      left: 0;
+      border: 0;
+      outline-style: none;
+      padding: 10px;
+      background-color: rgba(222, 222, 222, 0.5);
+    }
+    .thumb-bar{
+      display: flex;
+      width: 800px;
+      margin: 0 auto;
+    }
+    .small{
+      width: 160px;
+      height: 100px;
+      background-size: cover;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>照片库</h1>
+
+  <div class="full-img">
+    <img class="displayed-img" src="img/1.jpg">
+    <div class="overlay"></div>
+    <button class="dark">变暗</button>
+  </div>
+
+  <div class="thumb-bar">
+  </div>
+  <script>
+    let bigImg = document.querySelector('img')
+    let btn = document.querySelector('.dark')
+    let bar = document.querySelector('.thumb-bar')
+    let overlay = document.querySelector('.overlay')
+    let shadow = false
+
+    let imgArr = ['img/1.jpg', 'img/2.jpg', 'img/3.jpg', 'img/4.jpg', 'img/5.jpg']
+
+    imgArr.forEach( item => {
+      let eImg = document.createElement('img')
+      eImg.className = 'small'
+      eImg.src = item
+      bar.appendChild(eImg)
+      eImg.addEventListener('click', function () {
+        bigImg.src = item
+      })
+    })
+
+    btn.onclick = function () {
+      shadow = !shadow
+      bgShadow(shadow)
+    }
+
+    function bgShadow (shadow) {
+      if(shadow){
+        overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.4)'
+        
+        btn.innerHTML = '变亮'
+      }else{
+        overlay.style.backgroundColor = 'rgba(0, 0, 0, 0)'
+        btn.innerHTML = '变暗'
+      }
+    }
+  </script>
+</body>
+</html>
